@@ -12,7 +12,7 @@ function Hero() {
                     <span className = "text-orange-300 font-extrabold text-8xl">Furniture</span>
                     <span className = "">A sofa is a versatile and comfortable piece of furniture designed for seating multiple people. Typically found in living rooms, it features a cushioned seat, backrest, and armrests.</span>
                     <span className= "text-2xl font-extrabold text-black mt-10 mb-4 tracking-wider">$400</span>
-                    <Button onClick = {() => alert("test")}>View Ad</Button>
+                    <Button>View Ad</Button>
                 </div>
                 <div className = "bg-gray-100 flex justify-center items-center rounded-md">
                     <img className = "h-[95%] rounded-sm" src = {sofa}/>

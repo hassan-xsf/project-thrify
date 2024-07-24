@@ -10,5 +10,6 @@ import Register from './Register';
 import Input from './Input'
 import App from './App'
 import AdForm from "./Posts/AdForm";
+import ViewAd from "./Posts/ViewAd";
 
-export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm}
+export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm,ViewAd}
