@@ -9,6 +9,6 @@ import Login from './Login';
 import Register from './Register';
 import Input from './Input'
 import App from './App'
-import AdForm from "./AdForm";
+import AdForm from "./Posts/AdForm";
 
 export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm}

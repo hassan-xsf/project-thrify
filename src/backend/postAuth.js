@@ -13,7 +13,7 @@ class PostService {
         this.databases = new Databases(this.client)
         this.storage = new Storage(this.client);
     }
-    createPicture = async({file}) => {
+    createPicture = async(file) => {
         try {
             return await this.storage.createFile(
                 config.appWriteStorageID,
