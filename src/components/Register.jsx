@@ -78,7 +78,7 @@ function Register() {
 
           <Link to="/register" className="text-xs hover:text-orange-400 hover:underline text-gray-600">Already have an account?</Link>
           <span className="text-red-500 text-xs text-center max-w-24 mx-auto">{error}</span>
-          <Button type = "submit" disabled = {clicked} className = "text-sm py-1 w-full mt-2">{clicked ? "" : "Create Account"}</Button>
+          <Button type = "submit" disabled = {clicked} className = "text-sm py-1 w-full mt-2">{clicked ? "Loading..." : "Create Account"}</Button>
         </div>
       </form>
     </Container>

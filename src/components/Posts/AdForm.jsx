@@ -21,7 +21,7 @@ function AdForm({ post }) {
     const userId = useSelector(state => state.auth.authData)
 
     const createPost = (e) => {
-        const fObj = { title: e.title, content: textArea, author: userId.$id , price: e.price , category: select}
+        const fObj = { title: e.title, content: textArea, author: userId.$id , authorName: userId.name , price: e.price , category: select}
         console.log(fObj)
         setError("")
         if (clicked) return;
@@ -33,7 +33,7 @@ function AdForm({ post }) {
                     Post.createAd({ image: e.$id, ...fObj })
                         .then((e) => {
                             console.log(e)
-                            navigate("/")
+                            navigate(`/ad/${e.$id}`)
                         })
                         .catch((e) => {
                             setError(e.message)
@@ -76,11 +76,11 @@ function AdForm({ post }) {
     }
     return (
         <Container>
-            <div className="bg-gray-100 px-20 tracking-tight pt-16 text-gray-700 py-16 flex justify-center flex-col items-cen">
-                <span className="text-center font-light text-xl pb-4">Creating a new advertisement post...</span>
+            <div className="bg-gray-100 px-4 tracking-tight pt-6 text-gray-700 py-16 flex justify-center flex-col sm:pt-16 sm:px-20">
+                <span className="text-center font-light text-lg pb-4 sm:text-xl">Creating a new advertisement post...</span>
                 {error == "" || <span className="text-center text-red-500 font-bold text-sm pb-14">{error}</span>}
                 <form onSubmit={handleSubmit(createPost)} className="flex flex-col gap-12">
-                    <div className="grid grid-cols-2 grid-rows-1">
+                    <div className="grid grid-cols-1 grid-rows-1 sm:grid-cols-2 place-items-center sm:place-items-start">
                         <div className="w-3/4 flex flex-col gap-2">
                             <Input
                                 {...register("title", { required: true })}
@@ -100,7 +100,7 @@ function AdForm({ post }) {
                                 label="Price" placeholder="Enter price for your item" type="text"
                             />
                             <label className="text-xs font-bold text-gray-700">Select a category: </label>
-                            <select onChange = {(e) => setSelect(e.target.value)} className="text-xs py-1.5 w-1/3 ring-1 outline-none ring-gray-300 rounded-md">
+                            <select onChange = {(e) => setSelect(e.target.value)} className="text-xs py-1.5 w-1/3 ring-1 outline-none ring-gray-300 rounded-md mb-3 sm:mb-0">
                                 {
                                     categories.map((e,ind) => (
                                         <option className = "font-poppins" key = {ind}>{e}</option>
@@ -124,7 +124,7 @@ function AdForm({ post }) {
                         </div>
                     </div>
                     <div className="flex justify-center">
-                        <Button disabled={clicked} className="col-span-2">{clicked ? "" : "POST ADVERTISEMENT"}</Button>
+                        <Button disabled={clicked} className="text-xs sm:text-base">{clicked ? "" : "POST ADVERTISEMENT"}</Button>
                     </div>
                 </form>
             </div>

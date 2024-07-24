@@ -24,7 +24,7 @@ class PostService {
             throw error;
         }
     }
-    deletePicture = async({pID}) => {
+    deletePicture = async(pID) => {
         try {
             return await this.storage.deleteFile(
                 config.appWriteStorageID,
@@ -34,7 +34,7 @@ class PostService {
             throw error;
         }
     }
-    getPicture = async({pID}) => {
+    getPicture = async(pID) => {
         try {
             return this.storage.getFilePreview(
                 config.appWriteStorageID,
@@ -44,7 +44,7 @@ class PostService {
             throw error;
         }
     }
-    createAd = async({title,content,author,image}) => {
+    createAd = async({title,content,author,authorName,image,price,category}) => {
         try {
             return await this.databases.createDocument(
                 config.appWriteDatabaseID,
@@ -54,7 +54,10 @@ class PostService {
                     title,
                     content,
                     author,
-                    image
+                    authorName,
+                    image,
+                    price,
+                    category
                 }
             )
         } catch (error) {
@@ -72,7 +75,7 @@ class PostService {
             throw error;
         }
     }
-    editAd = async({adID,title,content,images}) => {
+    editAd = async({adID,title,content,image,price,category}) => {
         try {
             return await this.databases.updateDocument(
                 config.appWriteDatabaseID,
@@ -81,14 +84,16 @@ class PostService {
                 {
                     title,
                     content,
-                    images
+                    image,
+                    price,
+                    category
                 }
             )
         } catch (error) {
             throw error;
         }
     }
-    showAds = async() => {
+    getAds = async() => {
         try {
             return await this.databases.listDocuments(
                 config.appWriteDatabaseID,
@@ -98,7 +103,7 @@ class PostService {
             throw error;
         }
     }
-    showAd = async({adID}) => {
+    getAd = async(adID) => {
         try {
             return await this.databases.getDocument(
                 config.appWriteDatabaseID,

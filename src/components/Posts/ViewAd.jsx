@@ -1,45 +1,77 @@
-import React from 'react'
-import {Container,Button} from '../index'
+import React, { useState , useEffect } from 'react'
+import { Container, Button } from '../index'
 import sofa from '../../assets/sofa.jpg'
 import { useParams } from 'react-router-dom'
+import { Post } from '../../backend/postAuth'
+import { useNavigate } from 'react-router-dom'
 
 function ViewAd() {
 
-  const {ID} = useParams();
+    const navigate = useNavigate();
+    const { ID } = useParams();
+    const [loading,setLoading] = useState(true)
+    const [data,setData] = useState({})
 
-  console.log(ID)
-  return (
-    <Container>
-        <div className = "bg-gray-100 px-20 tracking-tighter pt-16 text-gray-700 py-6">
-            <div className = "grid grid-rows-1 grid-cols-2">
-                <div className = "bg-gray-100 ring-4 ring-orange-200 flex justify-center items-center rounded-md w-full">
-                    <img className = "h-[95%] w-full rounded-sm object-contain" src = {sofa}/>
+    useEffect(() => {
+        Post.getAd(ID)
+            .then((e) => {
+                Post.getPicture(e.image)
+                    .then((img) => {
+                        
+                        const date = new Date(e.$updatedAt)
+                        const cdate = date.toLocaleString();
+                        setData({cdate,img, ...e})
+                        console.log(data)
+                        
+                        setLoading(false)
+                    })
+                    .catch(() => {
+                        setData({sofa, ...e})
+                        setLoading(false)
+                        console.log("Error retreiving image") 
+                    })
+            })
+            .catch((e) => {
+                navigate("/notfound")
+                console.log("There was an error" +e)
+            })
+    } , [])
+
+
+
+    return (
+        !loading && 
+        <Container>
+            <div className="bg-gray-100 px-4 tracking-tighter pt-8 text-gray-700 py-6 sm:px-20 sm:pt-16">
+                <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-2 sm:grid-rows-1">
+                    <div className="bg-gray-100 ring-2 ring-orange-200 flex justify-center items-center rounded-md h-[90%] sm:h-full">
+                        <img className="h-[95%] rounded-sm object-cover" src={data.img} />
+                    </div>
+                    <div className="flex flex-col justify-center items-center text-center sm:ml-10 sm:items-start sm:text-start">
+                        <span className="text-orange-300 font-extrabold text-4xl">{data.title}</span>
+                        <span className="mb-4">{data.content}</span>
+                        <span className="pb-4 text-xl font-light text-black flex flex-col">
+                            <span className="text-orange-300 font-bold">Category</span>
+                            {data.category}
+                        </span>
+                        <span className="pb-4 text-xl font-light text-black flex flex-col">
+                            <span className="text-orange-300 font-bold">Post By</span>
+                            {data.authorName}
+                        </span>
+                        <span className="pb-4 text-xl font-light text-black flex flex-col">
+                            <span className="text-orange-300 font-bold">Date Posted</span>
+                            {data.cdate}
+                        </span>
+                        <span className="text-2xl font-extrabold text-black mt-4 mb-4 tracking-wider">Rs {data.price}</span>
+                        <Button className="w-full">Add to Favourites</Button>
+                    </div>
                 </div>
-                <div className = "flex flex-col justify-center ml-10">
-                    <span className = "text-orange-300 font-extrabold text-4xl">A Luxury Plant Box</span>
-                    <span className = "mb-4">A sofa is a versatile and comfortable piece of furniture designed for seating multiple people. Typically found in living rooms, it features a cushioned seat, backrest, and armrests.</span>
-                    <span className = "pb-4 text-xl font-light text-black flex flex-col">
-                        <span className = "text-orange-300 font-bold">Category</span>
-                        Furniture
-                    </span>
-                    <span className = "pb-4 text-xl font-light text-black flex flex-col">
-                        <span className = "text-orange-300 font-bold">Post By</span>
-                        Hassan
-                    </span>  
-                    <span className = "pb-4 text-xl font-light text-black flex flex-col">
-                        <span className = "text-orange-300 font-bold">Date Posted</span>
-                        24/1/2024
-                    </span>     
-                    <span className= "text-2xl font-extrabold text-black mt-4 mb-4 tracking-wider">Rs 24000</span>                
-                    <Button className = "w-full">Add to Favourites</Button>
-                </div>
+
             </div>
-        
-        </div>
-    </Container>
-
-  )
+        </Container>
+                            
+    )
 }
-
+                    
 export default ViewAd
 
