@@ -46,5 +46,19 @@ class AuthService {
             throw error;
         }
     }
+    setPref = async(pref) => {
+        try {
+            return await this.account.updatePrefs(pref);
+        } catch (error) {
+            throw error;
+        }
+    }
+    getPrefs = async() => {
+        try {
+            return await this.account.getPrefs();
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 export const Auth = new AuthService();

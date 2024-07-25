@@ -31,7 +31,12 @@ function Login() {
       Auth.loginAccount(e)
         .then(() => {
           console.log("Account logged in succesfully.")
-          dispatch(login())
+          Auth.getPrefs()
+          .then((p) => dispatch(login({data: e , prefs: p})))
+          .catch((p) => {
+            dispatch(login({data: e}))
+            console.log("Prefs error: "+p)
+          })
           navigate("/")
           
         })
