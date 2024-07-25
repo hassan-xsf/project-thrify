@@ -6,6 +6,8 @@ import { Auth } from '../backend/userAuth'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { toast} from 'react-toastify'
+
 
 function Register() {
   const status = useSelector(state => state.auth.authStatus)
@@ -32,11 +34,11 @@ function Register() {
           Auth.getUser()
             .then((e) => {
               Auth.setPref({ID: []})
-                .then((e) => {
-                  console.log("pref set!")
+                .then(() => {
+                  toast.success("Account created succesfully")
                 })
                 .catch((e) => {
-                  console.log("PrefSet: "+e)
+                  console.log("PrefSetError: "+e)
                 })
               dispatch(login(e))
             })
@@ -47,6 +49,7 @@ function Register() {
         })
         .catch((e) => {
           console.log("There was an error" + e)
+          toast.error("There was an error please try again!");
           setError(e.message)
         })
         .finally(() => {
@@ -91,6 +94,7 @@ function Register() {
         </div>
       </form>
     </Container>
+    
   )
 }
 

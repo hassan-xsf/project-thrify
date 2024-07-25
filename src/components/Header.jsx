@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import account from '../assets/account.png'
 import heart from '../assets/heart.png'
 import hamburger from '../assets/menu.png'
@@ -11,8 +11,7 @@ function Header() {
 
   const isLoggedIn = useSelector(state => state.auth.authStatus)
   const totalFavs = useSelector(state => state.auth.authData)
-  // FIX TOTAL COUNT
-  // console.log(totalFavs.prefs.ID)
+
   const navItems = [
     {
       name: "Home",
@@ -66,7 +65,7 @@ function Header() {
         <ul className="flex gap-3 justify-center items-center">
           <div className = "relative">
             <img className="w-8" src={heart}/>
-            <span className= "text-white size-5 bg-orange-400 flex justify-center items-center rounded-full text-xs font-extrabold absolute left-4 top-0">{!totalFavs?.length ? "0" : totalFavs.length}</span>
+            {isLoggedIn && <span className= "text-white size-5 bg-orange-400 flex justify-center items-center rounded-full text-xs font-extrabold absolute left-4 top-0">{totalFavs.prefs ? totalFavs.prefs?.ID.length : "0"}</span>}
           </div>
           <img className = "w-8" src={account} />
           <img className = "w-6 block sm:hidden" src = {hamburger}/>

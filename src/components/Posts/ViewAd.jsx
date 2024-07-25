@@ -7,6 +7,8 @@ import { Auth } from '../../backend/userAuth'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateUser } from '../../store/userSlice'
+import { toast} from 'react-toastify'
+
 
 function ViewAd() {
 
@@ -47,6 +49,7 @@ function ViewAd() {
             Auth.setPref({ID: nobj})
                 .then((e) => {
                     dispatch(updateUser(e))
+                    toast.info("Removed from favourite!");
                     setuserFav(false)
                 })
                 .catch((e) => {
@@ -68,6 +71,7 @@ function ViewAd() {
                 .then((e) => {
                     dispatch(updateUser(e))
                     setuserFav(true)
+                    toast.info("Added to favourite ❤️");
                 })
                 .catch((e) => {
                     console.log(e)

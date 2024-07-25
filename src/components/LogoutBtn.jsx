@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch , useSelector } from 'react-redux';
 import { logout } from '../store/userSlice';
 import { Auth } from '../backend/userAuth';
+import {toast} from 'react-toastify'
 
 function LogoutBtn() {
 
@@ -15,6 +16,7 @@ function LogoutBtn() {
     if(userStatus) {
         Auth.logoutAccount()
             .then(() => {
+                toast.info("You have logged out succesfully!")
                 dispatch(logout())
             })
             .finally(() => {
@@ -23,7 +25,9 @@ function LogoutBtn() {
     }
   }
   return (
-    <button onClick = {handleLogout}>Logout</button>
+    <>
+      <button onClick = {handleLogout}>Logout</button>
+    </>
   )
 }
 

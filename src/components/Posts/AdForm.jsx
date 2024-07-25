@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Post } from '../../backend/postAuth';
 import { useNavigate } from 'react-router-dom';
 import { categories } from './categories';
+import {toast} from 'react-toastify'
 
 function AdForm({ post }) {
 
@@ -16,15 +17,21 @@ function AdForm({ post }) {
     const [clicked, setClicked] = useState(false)
     const [select,setSelect] = useState(categories[0])
 
+
     const navigate = useNavigate();
 
     const userId = useSelector(state => state.auth.authData)
-
+    const status = useSelector(state => state.auth.authStatus)
+  
+  
+    useEffect(() => {
+      if (!status) return navigate("/");
+    }, [])
     const createPost = (e) => {
-        const fObj = { title: e.title, content: textArea, author: userId.$id , authorName: userId.name , price: e.price , category: select}
-        console.log(fObj)
-        setError("")
+
         if (clicked) return;
+        const fObj = { title: e.title, content: textArea, author: userId.$id , authorName: userId.name , price: e.price , category: select}
+        setError("")
         setClicked(true)
 
         try {
@@ -32,7 +39,7 @@ function AdForm({ post }) {
                 .then((e) => {
                     Post.createAd({ image: e.$id, ...fObj })
                         .then((e) => {
-                            console.log(e)
+                            toast.success("Advertisement has been successfully created!")
                             navigate(`/ad/${e.$id}`)
                         })
                         .catch((e) => {
@@ -97,7 +104,7 @@ function AdForm({ post }) {
                             />
                             <Input
                                 {...register("price", { required: true })}
-                                label="Price" placeholder="Enter price for your item" type="text"
+                                label="Price" placeholder="Enter price for your item" type="number"
                             />
                             <label className="text-xs font-bold text-gray-700">Select a category: </label>
                             <select onChange = {(e) => setSelect(e.target.value)} className="text-xs py-1.5 w-1/3 ring-1 outline-none ring-gray-300 rounded-md mb-3 sm:mb-0">
@@ -118,17 +125,16 @@ function AdForm({ post }) {
                             <div className="max-h-60">
                                 {
                                     imagePreviewUrl &&
-                                    <img className="h-full w-full object-cover rounded-md" src={imagePreviewUrl} />
+                                    <img className="max-h-60 w-full object-cover rounded-md" src={imagePreviewUrl} />
                                 }
                             </div>
                         </div>
                     </div>
                     <div className="flex justify-center">
-                        <Button disabled={clicked} className="text-xs sm:text-base">{clicked ? "" : "POST ADVERTISEMENT"}</Button>
+                        <Button disabled={clicked} className="text-xs sm:text-base">{clicked ? "POSTING..." : "POST ADVERTISEMENT"}</Button>
                     </div>
                 </form>
             </div>
-
         </Container>
     )
 }

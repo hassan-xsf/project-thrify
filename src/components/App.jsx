@@ -4,6 +4,8 @@ import { Header, Footer } from './index'
 import { useDispatch } from 'react-redux'
 import { login, logout } from '../store/userSlice'
 import { Auth } from '../backend/userAuth'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -37,6 +39,7 @@ function App() {
                     <Header />
                     <Outlet />
                     <Footer />
+                    <ToastContainer autoClose = {1200} />
                 </div>
             }
         </>
