@@ -1,11 +1,13 @@
-import React , {useEffect} from 'react'
+import React , {useEffect, useState} from 'react'
 import { Container, PostCard , Button } from '../index'
 import { Post } from '../../backend/postAuth'
 
 function AllPosts() {
 
+  const [offset,setOffset] = useState(0)
+  
   useEffect(() => {
-      Post.getAds()
+      Post.getAds({offset : 0})
           .then((e) => {
               console.log(e.documents)
           })

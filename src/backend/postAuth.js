@@ -1,4 +1,4 @@
-import { ID , Client, Storage , Databases } from "appwrite";
+import { ID , Client, Storage , Databases , Query } from "appwrite";
 import {config} from './config'
 
 class PostService {
@@ -93,12 +93,16 @@ class PostService {
             throw error;
         }
     }
-    getAds = async() => {
+    getAds = async ({ limit = 4, offset = 0 }) => {
         try {
             return await this.databases.listDocuments(
                 config.appWriteDatabaseID,
-                config.appWriteCollectionID
-            )
+                config.appWriteCollectionID,
+                [
+                    Query.limit(limit),
+                    Query.offset(offset)
+                ]
+            );
         } catch (error) {
             throw error;
         }
