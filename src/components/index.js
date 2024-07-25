@@ -12,5 +12,7 @@ import App from './App'
 import AdForm from "./Posts/AdForm";
 import ViewAd from "./Posts/ViewAd";
 import AllPosts from "./Posts/AllPosts";
+import PostCard from "./Posts/PostCard"
+import Favourites from "./Favourites";
 
-export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm,ViewAd,AllPosts}
+export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm,ViewAd,AllPosts,PostCard,Favourites}

@@ -18,10 +18,10 @@ function Hero() {
                     <img className = "h-[95%] rounded-sm object-cover" src = {sofa}/>
                 </div>
             </div>
-            <div className = "h-10 bg-gray-100 flex justify-center items-center gap-5 text-black">
-                <button className = "bg-black rounded-full w-6">.</button>
-                <button className = "bg-black rounded-full w-6">.</button>
-                <button className = "bg-black rounded-full w-6">.</button>
+            <div className = "h-10 bg-gray-100 flex justify-center items-center gap-5 text-orange-400">
+                <button className = "bg-orange-400 rounded-full w-6">.</button>
+                <button className = "bg-orange-400 rounded-full w-6">.</button>
+                <button className = "bg-orange-400 rounded-full w-6">.</button>
             </div>
         
         </div>

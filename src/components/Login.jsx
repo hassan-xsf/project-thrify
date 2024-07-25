@@ -39,7 +39,6 @@ function Login() {
             .finally(() => {
               navigate("/")
             })
-          dispatch(login(x))
         })
         .catch((e) => {
           console.log("There was an error" + e)

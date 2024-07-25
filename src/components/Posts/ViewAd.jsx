@@ -58,6 +58,7 @@ function ViewAd() {
                 })
         }
         else {
+            if(userFavs.prefs.ID.length >= 10) return toast.error("You have reached maximum favourites limit..");
             const obj = {
                 ID: [
                     ID,
@@ -84,8 +85,8 @@ function ViewAd() {
         !loading &&
         <Container>
             <div className="bg-gray-100 px-4 tracking-tighter pt-8 text-gray-700 py-6 sm:px-20 sm:pt-16">
-                <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-2 sm:grid-rows-1">
-                    <div className="bg-gray-100 ring-2 ring-orange-200 flex justify-center items-center rounded-md h-[90%] sm:h-full">
+                <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-2 sm:grid-rows-1 h-[90%] sm:h-full sm:max-h-96">
+                    <div className="bg-gray-100 ring-2 ring-orange-200 flex justify-center items-center rounded-md max-h-96 sm:max-h-full">
                         <img className="h-[95%] rounded-sm object-cover" src={data.img} />
                     </div>
                     <div className="flex flex-col justify-center items-center text-center sm:ml-10 sm:items-start sm:text-start">

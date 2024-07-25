@@ -64,7 +64,9 @@ function Header() {
         </ul>
         <ul className="flex gap-3 justify-center items-center">
           <div className = "relative">
-            <img className="w-8" src={heart}/>
+            <Link to = "/favs">
+              <img className="w-8" src={heart}/>
+            </Link>
             {isLoggedIn && <span className= "text-white size-5 bg-orange-400 flex justify-center items-center rounded-full text-xs font-extrabold absolute left-4 top-0">{totalFavs.prefs ? totalFavs.prefs?.ID.length : "0"}</span>}
           </div>
           <img className = "w-8" src={account} />
