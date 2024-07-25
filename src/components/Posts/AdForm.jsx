@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { Container, Input, Button } from '../index'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux';
@@ -100,6 +100,7 @@ function AdForm({ post }) {
                                 onChange={(e) => setTextArea(e.target.value)}
                                 rows="8"
                                 cols="50"
+                                maxLength="220"
                                 className="font-sans text-xs py-1.5 pl-1 mr-10 pr-2 w-full ring-1 outline-none ring-gray-300 rounded-md"
                             />
                             <Input

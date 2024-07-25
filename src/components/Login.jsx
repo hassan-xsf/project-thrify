@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../store/userSlice'
 import { Auth } from '../backend/userAuth'
-import { toast , ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.min.css';
 
 function Login() {
 
@@ -33,14 +31,18 @@ function Login() {
       Auth.loginAccount(e)
         .then(() => {
           console.log("Account logged in succesfully.")
-          dispatch(login(e))
-          navigate("/")
-          toast.success("Logged in succesfully!");
-
+          Auth.getUser()
+            .then((data) => {
+              dispatch(login(data))
+            })
+            .catch((e) => console.log("loginUser: "+e))
+            .finally(() => {
+              navigate("/")
+            })
+          dispatch(login(x))
         })
         .catch((e) => {
           console.log("There was an error" + e)
-          toast.error("Theree was an error, Please try again!");
           setError(e.message)
         })
         .finally(() => {
@@ -78,7 +80,6 @@ function Login() {
           <Button type="submit" disabled={clicked} className="text-sm py-1 w-full mt-2">{clicked ? "Loading..." : "Login"}</Button>
         </div>
       </form>
-      <ToastContainer autoClose = {1000} />
     </Container>
   )
 }

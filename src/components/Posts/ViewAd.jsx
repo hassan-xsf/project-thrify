@@ -90,7 +90,7 @@ function ViewAd() {
                     </div>
                     <div className="flex flex-col justify-center items-center text-center sm:ml-10 sm:items-start sm:text-start">
                         <span className="text-orange-300 font-extrabold text-4xl">{data.title}</span>
-                        <span className="mb-4">{data.content}</span>
+                        <span className="mb-4 max-w-md break-words">{data.content}</span>
                         <span className="pb-4 text-xl font-light text-black flex flex-col">
                             <span className="text-orange-300 font-bold">Category</span>
                             {data.category}
