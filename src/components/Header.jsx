@@ -10,6 +10,9 @@ import LogoutBtn from './LogoutBtn'
 function Header() {
 
   const isLoggedIn = useSelector(state => state.auth.authStatus)
+  const totalFavs = useSelector(state => state.auth.authData)
+  // FIX TOTAL COUNT
+  // console.log(totalFavs.prefs.ID)
   const navItems = [
     {
       name: "Home",
@@ -61,8 +64,11 @@ function Header() {
           {isLoggedIn && <LogoutBtn/>}
         </ul>
         <ul className="flex gap-3 justify-center items-center">
-          <img className="w-6" src={heart} />
-          <img src={account} />
+          <div className = "relative">
+            <img className="w-8" src={heart}/>
+            <span className= "text-white size-5 bg-orange-400 flex justify-center items-center rounded-full text-xs font-extrabold absolute left-4 top-0">{!totalFavs?.length ? "0" : totalFavs.length}</span>
+          </div>
+          <img className = "w-8" src={account} />
           <img className = "w-6 block sm:hidden" src = {hamburger}/>
         </ul>
       </div>

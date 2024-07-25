@@ -31,12 +31,14 @@ function Register() {
           console.log("Account created succesfully.")
           Auth.getUser()
             .then((e) => {
-              Auth.getPrefs()
-                .then((p) => dispatch(login({ data: e, prefs: p })))
-                .catch((p) => {
-                  dispatch(login({ data: e }))
-                  console.log("Prefs error: " + p)
+              Auth.setPref({ID: []})
+                .then((e) => {
+                  console.log("pref set!")
                 })
+                .catch((e) => {
+                  console.log("PrefSet: "+e)
+                })
+              dispatch(login(e))
             })
             .catch((e) => dispatch(logout()))
             .finally(() => {

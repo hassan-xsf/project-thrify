@@ -53,12 +53,5 @@ class AuthService {
             throw error;
         }
     }
-    getPrefs = async() => {
-        try {
-            return await this.account.getPrefs();
-        } catch (error) {
-            throw error;
-        }
-    }
 }
 export const Auth = new AuthService();

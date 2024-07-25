@@ -22,12 +22,7 @@ function App() {
                 //     .catch((e) => {
                 //     console.log(e)
                 // })
-                Auth.getPrefs()
-                    .then((p) => dispatch(login({data: e , prefs: p})))
-                    .catch((p) => {
-                    dispatch(login({data: e}))
-                    console.log("Prefs error: "+p)
-                })
+                dispatch(login(e))
             })
             .catch((e) => dispatch(logout()))
             .finally(() => {
