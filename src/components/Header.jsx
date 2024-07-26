@@ -91,6 +91,7 @@ function Header() {
               item.active &&
               <NavLink
                 key={ind}
+                onClick = {() => toggleNav(false)}
                 to={item.slug}
                 className={({ isActive }) =>
                   isActive ? "text-orange-300 w-3/4 text-center drop-shadow-lg ring-2 ring-gray-500 py-2 rounded-md" : "text-orange-300 no-underline w-3/4 text-center drop-shadow-lg ring-2 ring-gray-500 py-2 rounded-md" 
