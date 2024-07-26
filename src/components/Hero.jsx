@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container, Button } from './index'
-import sofa from '../assets/menu.png'
 import { useNavigate } from 'react-router-dom'
 
 function Hero({ data }) {

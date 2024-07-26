@@ -29,14 +29,13 @@ function AllPosts() {
   }, [offset])
 
   const handleClick = () => {
-    console.log(`DEBUG: ${offset+4} : ${total}`)
     if(total > offset+4) {
       setOffset(s => s+4)
     }
   }
 
   return (
-    loading || (
+    loading ? (<Container><div className = "h-96 bg-gray-300 w-full animate-pulse"></div></Container>) : (
       <Container>
         <div className="bg-gray-100 px-4 pt-8 text-gray-700 py-6 flex flex-col items-center sm:px-20 sm:pt-16">
           <div className="grid grid-cols-1 gap-y-5 gap-x-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

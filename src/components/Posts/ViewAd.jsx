@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateUser } from '../../store/userSlice'
 import { toast} from 'react-toastify'
+import { AdForm } from '../index'
 
 
 function ViewAd() {
@@ -19,6 +20,7 @@ function ViewAd() {
     const dispatch = useDispatch();
     const userFavs = useSelector(state => state.auth.authData)
     const [userFav, setuserFav] = useState(false)
+    const [isEdit,setisEdit] = useState(false)
 
     useEffect(() => {
         Post.getAd(ID)
@@ -55,7 +57,7 @@ function ViewAd() {
             })
     }
     const handleEdit = () => {
-
+        setisEdit(true)
     }
     const handleClick = () => {
         if (userFav) {
@@ -94,46 +96,49 @@ function ViewAd() {
         }
     }
 
-
+    
     return (
         !loading &&
-        <Container>
-            <div className="bg-gray-100 px-4 tracking-tighter pt-8 text-gray-700 py-6 sm:px-20 sm:pt-16">
-                <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-2 sm:grid-rows-1 h-[90%] sm:h-full sm:max-h-96">
-                    <div className="bg-gray-100 ring-2 ring-orange-200 flex justify-center items-center rounded-md max-h-96 sm:max-h-full">
-                        <img className="h-[95%] rounded-sm object-cover" src={data.img} />
+        (
+            isEdit ? <AdForm data = {data}/> :
+            <Container>
+                <div className="bg-gray-100 px-4 tracking-tighter pt-8 text-gray-700 py-6 sm:px-20 sm:pt-16">
+                    <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-2 sm:grid-rows-1 h-[90%] sm:h-full sm:max-h-96">
+                        <div className="bg-gray-100 ring-2 ring-orange-200 flex justify-center items-center rounded-md max-h-96 sm:max-h-full">
+                            <img className="h-[95%] rounded-sm object-cover" src={data.img} />
+                        </div>
+                        <div className="flex flex-col justify-center items-center text-center sm:ml-10 sm:items-start sm:text-start">
+                            <span className="text-orange-300 font-extrabold text-4xl">{data.title}</span>
+                            <span className="mb-2 text-sm max-w-md break-words">{data.content}</span>
+                            <span className="pb-1 text-sm font-light text-black flex flex-col">
+                                <span className="text-orange-300 font-bold">Category</span>
+                                {data.category}
+                            </span>
+                            <span className="pb-1 text-sm font-light text-black flex flex-col">
+                                <span className="text-orange-300 font-bold">Post By</span>
+                                {data.authorName}
+                            </span>
+                            <span className="pb-1 text-sm font-light text-black flex flex-col">
+                                <span className="text-orange-300 font-bold">Date Posted</span>
+                                {data.cdate}
+                            </span>
+                            <span className="text-2xl font-extrabold text-black mb-4 mt-2 tracking-wider">Rs {data.price}</span>
+                            <Button onClick={handleClick} className="w-full">{userFav ? "Remove from Favourites" : "Add to Favourites"}</Button>
+                            {
+                                userFavs?.$id == data.author && 
+                                (
+                                    <div className= "flex items-center justify-center gap-4 mt-2 w-full">
+                                        <Button onClick = {handleEdit} className = "bg-green-400">Edit Ad</Button>
+                                        <Button onClick = {handleDelete} className = "bg-red-400">Delete Ad</Button>
+                                    </div>
+                                )
+                            }
+                        </div>
                     </div>
-                    <div className="flex flex-col justify-center items-center text-center sm:ml-10 sm:items-start sm:text-start">
-                        <span className="text-orange-300 font-extrabold text-4xl">{data.title}</span>
-                        <span className="mb-2 text-sm max-w-md break-words">{data.content}</span>
-                        <span className="pb-1 text-sm font-light text-black flex flex-col">
-                            <span className="text-orange-300 font-bold">Category</span>
-                            {data.category}
-                        </span>
-                        <span className="pb-1 text-sm font-light text-black flex flex-col">
-                            <span className="text-orange-300 font-bold">Post By</span>
-                            {data.authorName}
-                        </span>
-                        <span className="pb-1 text-sm font-light text-black flex flex-col">
-                            <span className="text-orange-300 font-bold">Date Posted</span>
-                            {data.cdate}
-                        </span>
-                        <span className="text-2xl font-extrabold text-black mb-4 mt-2 tracking-wider">Rs {data.price}</span>
-                        <Button onClick={handleClick} className="w-full">{userFav ? "Remove from Favourites" : "Add to Favourites"}</Button>
-                        {
-                            userFavs.$id == data.author && 
-                            (
-                                <div className= "flex items-center justify-center gap-4 mt-2 w-full">
-                                    <Button onClick = {handleEdit} className = "bg-green-400">Edit Ad</Button>
-                                    <Button onClick = {handleDelete} className = "bg-red-400">Delete Ad</Button>
-                                </div>
-                            )
-                        }
-                    </div>
-                </div>
 
-            </div>
-        </Container>
+                </div>
+            </Container>
+        )
 
     )
 }

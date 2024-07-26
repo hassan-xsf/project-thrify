@@ -1,5 +1,5 @@
 
-import {Hero} from './index'
+import {Hero,Container} from './index'
 import { Post } from '../backend/postAuth'
 import { useEffect, useState } from 'react'
 
@@ -27,7 +27,7 @@ function Home() {
   return (
     <>
       {
-        loading || <Hero data = {data}/>
+        loading ? (<Container><div className = "h-96 bg-gray-300 w-full animate-pulse"></div></Container>) :  <Hero data = {data}/>
       }
     </>
   )
