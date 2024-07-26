@@ -13,7 +13,7 @@ function Home() {
     const fetchFeatured = async () => {
       await Post.getAds({limit: 20 , offset: 0})
         .then((e) => {
-          if(e.length > 0) {
+          if(e.total > 0) {
             const r = Math.floor((Math.random() * e.total));
             Post.getPicture(e.documents[r].image)
             .then((x) => {

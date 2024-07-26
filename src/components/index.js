@@ -15,5 +15,6 @@ import AllPosts from "./Posts/AllPosts";
 import PostCard from "./Posts/PostCard"
 import Favourites from "./Favourites";
 import MyAccount from "./MyAccount";
+import About from "./About";
 
-export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm,ViewAd,AllPosts,PostCard,Favourites,MyAccount}
+export {Container,ErrorBoundary,Footer,Header,Hero,Home,Button,Login,Register,Input,App,AdForm,ViewAd,AllPosts,PostCard,Favourites,MyAccount,About}

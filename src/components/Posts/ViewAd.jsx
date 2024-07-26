@@ -98,7 +98,7 @@ function ViewAd() {
 
     
     return (
-        !loading &&
+        loading ? (<Container><div className = "h-96 bg-gray-300 w-full animate-pulse"></div></Container>) : 
         (
             isEdit ? <AdForm data = {data}/> :
             <Container>

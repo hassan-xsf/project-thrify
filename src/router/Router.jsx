@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import {Home,ErrorBoundary,Login,Register,App,AdForm,ViewAd,AllPosts,Favourites,MyAccount} from '../components/index'
+import {Home,ErrorBoundary,Login,Register,App,AdForm,ViewAd,AllPosts,Favourites,MyAccount, About} from '../components/index'
 
 
  const router = createBrowserRouter([
@@ -40,6 +40,10 @@ import {Home,ErrorBoundary,Login,Register,App,AdForm,ViewAd,AllPosts,Favourites,
         {
             path: '/myaccount',
             element: <MyAccount/>
+        },
+        {
+            path: '/about',
+            element: <About/>
         }
         ]
     }
