@@ -5,7 +5,7 @@ import { logout } from '../store/userSlice';
 import { Auth } from '../backend/userAuth';
 import {toast} from 'react-toastify'
 
-function LogoutBtn() {
+function LogoutBtn({className}) {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function LogoutBtn() {
   }
   return (
     <>
-      <button onClick = {handleLogout}>Logout</button>
+      <button className = {className} onClick = {handleLogout}>Logout</button>
     </>
   )
 }

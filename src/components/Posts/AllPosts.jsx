@@ -8,6 +8,7 @@ function AllPosts() {
   const [data, setData] = useState([])
   const [loading,setLoading] = useState(true)
   const [total,setTotal] = useState(0)
+  
 
   useEffect(() => {
     const fetchAdData = async () => {
@@ -47,7 +48,7 @@ function AllPosts() {
                )
             }
           </div>
-          <Button disabled = {total < offset+4} className = "my-6" onClick = {() => handleClick()}>Load More..</Button>
+          <Button disabled = {total < offset+4} className = "my-6 animate-bounce" onClick = {() => handleClick()}>Load More..</Button>
         </div>
 
       </Container>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Container , Button} from './index'
 import { useNavigate , Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import LogoutBtn from './LogoutBtn';
 
 function MyAccount() {
     const navigate = useNavigate();
@@ -17,7 +18,10 @@ function MyAccount() {
         status &&
         <Container>
             <div className="bg-gray-100 px-4 tracking-tighter pt-8 py-6 sm:px-20 sm:pt-16 flex flex-col gap-10">
-            <span className="text-3xl text-orange-400 font-extrabold sm:text-4xl">My Account</span>
+            <div className = "flex justify-between items-center">
+                <span className="text-3xl text-orange-400 font-extrabold sm:text-4xl">My Account</span>
+                <LogoutBtn className = "bg-orange-300 rounded-md w-1/5 py-2 text-white font-bold tracking-normal drop-shadow-2xl "/>
+            </div>
             <span>Welcome to your dashboard, Mr. {auth.name}</span>
                 <div className = "grid grid-cols-2 ring-4 ring-gray-300 items-center mb-2">
                     <div className = "bg-white p-2 font-semibold">Username </div>
@@ -33,6 +37,7 @@ function MyAccount() {
                     <div className = "bg-orange-300 p-2 text-white font-semibold">Total Favourites</div>
                     <div className = "bg-orange-300 p-2 text-white">{auth.prefs.ID.length} / 10</div>
                 </div>
+                
                 <Link to = "/favs" className = "flex justify-center items-center"><Button>View Favourites</Button></Link>
             </div>
         </Container>

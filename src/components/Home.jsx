@@ -13,12 +13,14 @@ function Home() {
     const fetchFeatured = async () => {
       await Post.getAds({limit: 20 , offset: 0})
         .then((e) => {
-          const r = Math.floor((Math.random() * e.total));
-          Post.getPicture(e.documents[r].image)
+          if(e.length > 0) {
+            const r = Math.floor((Math.random() * e.total));
+            Post.getPicture(e.documents[r].image)
             .then((x) => {
               setData({x, ...e.documents[r]})
               setLoading(false)
             })
+          }
         })
     }
     fetchFeatured();
