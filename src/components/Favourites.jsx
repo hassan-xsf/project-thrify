@@ -11,7 +11,7 @@ function FunctionCard({ data }) {
         navigate(`/ad/${id}`);
     }
     return (
-        <div onClick = {() => handleClick(data.id)} className="flex items-center bg-white rounded-md shadow-lg py-1 px-1.5 gap-2 shadow-gray-400 hover:transition-all hover:scale-110 cursor-pointer">
+        <div onClick = {() => handleClick(data.id)} className="flex items-center bg-white rounded-md shadow-lg py-1 px-1.5 gap-2 shadow-gray-400 hover:transition-all hover:scale-105 cursor-pointer">
             <div className="size-40">
                 <img className="w-full h-full object-contain" src= {data.image}/>
             </div>

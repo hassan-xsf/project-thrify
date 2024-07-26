@@ -64,7 +64,7 @@ class PostService {
             throw error;
         }
     }
-    deleteAd = async({adID}) => {
+    deleteAd = async(adID) => {
         try {
             return await this.databases.deleteDocument(
                 config.appWriteDatabaseID,

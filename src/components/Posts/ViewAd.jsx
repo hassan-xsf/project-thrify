@@ -33,7 +33,7 @@ function ViewAd() {
                         setLoading(false)
                     })
                     .catch(() => {
-                        setData({ sofa, ...e })
+                        setData({...e })
                         setLoading(false)
                         console.log("Error retreiving image")
                     })
@@ -43,6 +43,20 @@ function ViewAd() {
                 console.log("There was an error" + e)
             })
     }, [])
+
+    const handleDelete = () => {
+        Post.deletePicture(data.image)
+            .then(() => {
+                Post.deleteAd(data.$id)
+                    .then(() => {
+                        setData({})
+                        navigate("/")
+                    })
+            })
+    }
+    const handleEdit = () => {
+
+    }
     const handleClick = () => {
         if (userFav) {
             const nobj = userFavs.prefs.ID.filter(i => i != ID)
@@ -106,6 +120,15 @@ function ViewAd() {
                         </span>
                         <span className="text-2xl font-extrabold text-black mb-4 mt-2 tracking-wider">Rs {data.price}</span>
                         <Button onClick={handleClick} className="w-full">{userFav ? "Remove from Favourites" : "Add to Favourites"}</Button>
+                        {
+                            userFavs.$id == data.author && 
+                            (
+                                <div className= "flex items-center justify-center gap-4 mt-2 w-full">
+                                    <Button onClick = {handleEdit} className = "bg-green-400">Edit Ad</Button>
+                                    <Button onClick = {handleDelete} className = "bg-red-400">Delete Ad</Button>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
 
